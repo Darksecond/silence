@@ -11,7 +11,7 @@ void GLWindow::framebufferSizeCallback(GLFWwindow* window, int width, int height
 	}
 }
 
-GLWindow::GLWindow(int width, int height) : window(nullptr), _resized(false) {
+GLWindow::GLWindow(const int width, const int height) : window(nullptr), _resized(false) {
 	open(width, height);
 }
 
@@ -51,7 +51,7 @@ void GLWindow::initGLEW() {
 	printInfo();
 }
 
-void GLWindow::initGLFW(int width, int height) {
+void GLWindow::initGLFW(const int width, const int height) {
 	hintContext();
 	window = glfwCreateWindow(width, height, "OpenGL Window", NULL, NULL);
 	if(!window) {
@@ -61,7 +61,7 @@ void GLWindow::initGLFW(int width, int height) {
 	glfwMakeContextCurrent(window);
 }
 
-void GLWindow::open(int width, int height) {
+void GLWindow::open(const int width, const int height) {
 	assert(window == nullptr);
 	initGLFW(width, height);
 	initGLEW();
@@ -91,7 +91,7 @@ void GLWindow::swap() {
 	glfwPollEvents();
 }
 
-bool GLWindow::shouldClose() {
+bool GLWindow::shouldClose() const {
 	if(!window) return true;
 	return glfwWindowShouldClose(window);
 }
@@ -102,10 +102,10 @@ bool GLWindow::resized() {
 	return r;
 }
 
-int GLWindow::width() {
+int GLWindow::width() const {
 	return _width;
 }
 
-int GLWindow::height() {
+int GLWindow::height() const {
 	return _height;
 }

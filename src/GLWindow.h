@@ -9,8 +9,8 @@ class GLWindow {
 
 	void hintContext();
 	void initGLEW();
-	void initGLFW(int width, int height);
-	void open(int width, int height);
+	void initGLFW(const int width, const int height);
+	void open(const int width, const int height);
 	void printInfo();
 	void checkVersion();
 
@@ -18,14 +18,14 @@ class GLWindow {
 public:
 	GLFWwindow* window;
 
-	GLWindow(int width, int height);
+	GLWindow(const int width, const int height);
 	~GLWindow();
 
 	void setTitle(const char* title);
 	void swap();
-	bool shouldClose();
+	bool shouldClose() const;
 	void close();
 	bool resized();
-	int width();
-	int height();
+	int width() const;
+	int height() const;
 };

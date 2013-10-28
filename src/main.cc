@@ -3,6 +3,7 @@
 #include <cassert>
 
 #include "GLWindow.h"
+#include "VBOStore.h"
 
 #include <stdio.h>
 static void error_callback(int error, const char* description) {
@@ -32,11 +33,40 @@ int main() {
 
 	GLWindow window(800, 600);
 	glfwSetKeyCallback(window.window, key_callback);
+	//glfwSwapInterval(0); // Disable VSYNC
+	
+	VBOStore store(4096);
 
+	double previous = glfwGetTime();
+	double acc = 0.0;
+	double dt = 1.0/25; //run updates at 25FPS
+	double t = 0.0;
+	int rf = 0;
+	int uf = 0;
+	int frameskip = 5;
 	while (!window.shouldClose()) {
-		if(window.resized()) {
-			printf("resized to: %i, %i\n", window.width(), window.height());
+		double now = glfwGetTime();
+		double delta = now - previous;
+		previous = now;
+		//if(delta > 0.25) delta = 0.25;
+		acc += delta;
+		int loops = 0;
+		while(acc >= dt && loops < frameskip) {
+			//update(dt)
+			acc -= dt;
+			//t += dt;
+			++uf;
+			++loops;
 		}
+		double alpha = acc / dt; // Alpha is [0,1] and is the amount we are into the next frame, we can use this for timestep smoothing.
+		//render(alpha)
+		t += delta;
+		++rf;
+
+		char title[1024];
+		sprintf(title, "UFPS: %f RFPS: %f alpha: %f", uf/t, rf/t, alpha);
+		window.setTitle(title);
+
 		window.swap();
 	}
 
