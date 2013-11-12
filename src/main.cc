@@ -3,7 +3,6 @@
 #include <cassert>
 
 #include "GLWindow.h"
-#include "VBOStore.h"
 
 #include <stdio.h>
 static void error_callback(int error, const char* description) {
@@ -35,8 +34,6 @@ int main() {
 	glfwSetKeyCallback(window.window, key_callback);
 	//glfwSwapInterval(0); // Disable VSYNC
 	
-	VBOStore store(4096);
-
 	double previous = glfwGetTime();
 	double acc = 0.0;
 	double dt = 1.0/25; //run updates at 25FPS

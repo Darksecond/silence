@@ -14,9 +14,6 @@ if (APPLE)
 endif ()
 
 add_executable (silence
-	src/VBOStore.h
-	src/VBOStore.cc
-	src/GenericHandle.h
 	src/GLWindow.h
 	src/GLWindow.cc
 	src/main.cc
