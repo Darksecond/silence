@@ -3,6 +3,8 @@
 #include <cassert>
 
 #include "GLWindow.h"
+#include "Program.h"
+#include "Shader.h"
 
 #include <stdio.h>
 static void error_callback(int error, const char* description) {
@@ -33,6 +35,47 @@ int main() {
 	GLWindow window(800, 600);
 	glfwSetKeyCallback(window.window, key_callback);
 	//glfwSwapInterval(0); // Disable VSYNC
+	
+	//SHADER TESTS
+	Shader vs(GL_VERTEX_SHADER);
+	vs.loadFromString(
+			"#version 330\n"
+			"uniform mat4 projection;\n"
+			"uniform mat4 view;\n"
+			"in vec3 vert;\n"
+			"in vec2 vertTexCoord;\n"
+			"out vec2 fragTexCoord;\n"
+			"void main() {\n"
+			"fragTexCoord = vertTexCoord;\n"
+			"gl_Position = projection * view * vec4(vert, 1.0);\n"
+			"}\n"
+			);
+	if(!vs.compile()) {
+		printf("VS Compile failed: %s\n",vs.log());
+		exit(-1);
+	}
+	Shader fs(GL_FRAGMENT_SHADER);
+	fs.loadFromString(
+			"#version 330\n"
+			"uniform sampler2D diffuse;\n"
+			"in vec2 fragTexCoord;\n"
+			"out vec4 g_diff;\n"
+			"void main() {\n"
+			"g_diff = texture(diffuse, fragTexCoord);\n"
+			"}\n"
+			);
+	if(!fs.compile()) {
+		printf("FS Compile failed: %s\n",fs.log());
+		exit(-1);
+	}
+	Program p;
+	p.attachShader(&vs);
+	p.attachShader(&fs);
+	if(!p.link()) {
+		printf("Link failed: %s\n",p.log());
+		exit(-1);
+	}
+	//END SHADER TESTS
 	
 	double previous = glfwGetTime();
 	double acc = 0.0;

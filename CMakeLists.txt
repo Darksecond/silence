@@ -14,6 +14,10 @@ if (APPLE)
 endif ()
 
 add_executable (silence
+	src/Shader.h
+	src/Shader.cc
+	src/Program.h
+	src/Program.cc
 	src/GLWindow.h
 	src/GLWindow.cc
 	src/main.cc

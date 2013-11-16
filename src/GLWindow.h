@@ -1,7 +1,6 @@
 #pragma once
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "opengl.h"
 
 class GLWindow {
 	int _width, _height;
