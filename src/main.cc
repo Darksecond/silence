@@ -75,6 +75,7 @@ int main() {
 		printf("Link failed: %s\n",p.log());
 		exit(-1);
 	}
+
 	//END SHADER TESTS
 	
 	double previous = glfwGetTime();

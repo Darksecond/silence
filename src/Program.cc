@@ -43,38 +43,10 @@ bool Program::link() {
 	_shaders.clear();
 
 	// Check for link errors
-	GLint status;
-	glGetProgramiv(_obj, GL_LINK_STATUS, &status);
-	if(status == GL_FALSE) {
-		GLint length;
-		glGetProgramiv(_obj, GL_INFO_LOG_LENGTH, &length);
-		if(_log)
-			delete [] _log;
-		_log = new char[length+1];
-		glGetProgramInfoLog(_obj, length, NULL, _log);
-		return false;
-	}
+	if(check_errors() == false) return false;
 
-	// Cache attribute and uniform locations
-	// Cache attributes
-	GLint num_attributes;
-	glGetProgramiv(_obj, GL_ACTIVE_ATTRIBUTES, &num_attributes);
-	for(int i=0;i<num_attributes;++i) {
-		char name[256];
-		GLenum type;
-		GLint size;
-		glGetActiveAttrib(_obj, i, 256, NULL, &size, &type, name);
-		_attributes[name] = glGetAttribLocation(_obj, name);
-	}
-
-	// Cache uniforms
-	GLint num_uniforms;
-	glGetProgramiv(_obj, GL_ACTIVE_UNIFORMS, &num_uniforms);
-	for(int i=0;i<num_uniforms;++i) {
-		char name[256];
-		glGetActiveUniformName(_obj, i, 256, NULL, name);
-		_uniforms[name] = glGetUniformLocation(_obj, name);
-	}
+	cache_attributes();
+	cache_uniforms();
 
 	return true;
 }
@@ -92,4 +64,61 @@ void Program::destroy() {
 		delete [] _log;
 		_log = nullptr;
 	}
+}
+
+void Program::cache_attributes() {
+	GLint num_attributes;
+	glGetProgramiv(_obj, GL_ACTIVE_ATTRIBUTES, &num_attributes);
+	for(int i=0;i<num_attributes;++i) {
+		char name[256];
+		GLenum type;
+		GLint size;
+		glGetActiveAttrib(_obj, i, 256, NULL, &size, &type, name);
+		_attributes[name] = glGetAttribLocation(_obj, name);
+	}
+}
+
+void Program::cache_uniforms() {
+	GLint num_uniforms;
+	glGetProgramiv(_obj, GL_ACTIVE_UNIFORMS, &num_uniforms);
+	for(int i=0;i<num_uniforms;++i) {
+		char name[256];
+		glGetActiveUniformName(_obj, i, 256, NULL, name);
+		_uniforms[name] = glGetUniformLocation(_obj, name);
+	}
+}
+
+bool Program::check_errors() {
+	GLint status;
+	glGetProgramiv(_obj, GL_LINK_STATUS, &status);
+	if(status == GL_FALSE) {
+		GLint length;
+		glGetProgramiv(_obj, GL_INFO_LOG_LENGTH, &length);
+		if(_log)
+			delete [] _log;
+		_log = new char[length+1];
+		glGetProgramInfoLog(_obj, length, NULL, _log);
+		return false;
+	}
+	return true;
+}
+
+void Program::bind() const {
+	glUseProgram(_obj);
+}
+
+GLint Program::uniform(const char* name) {
+	auto u = _uniforms.find(name);
+	if(u != _uniforms.end()) {
+		return u->second;
+	}
+	return -1;
+}
+
+GLint Program::attribute(const char* name) {
+	auto a = _attributes.find(name);
+	if(a != _attributes.end()) {
+		return a->second;
+	}
+	return -1;
 }

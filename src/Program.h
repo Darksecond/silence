@@ -2,6 +2,7 @@
 
 #include <unordered_set>
 #include <map>
+#include <GLM/gtc/type_ptr.hpp>
 #include "util/string_hash.h"
 #include "opengl.h"
 #include "Shader.h"
@@ -15,6 +16,9 @@ class Program {
 	std::map<core::string_hash, GLint> _uniforms;
 
 	void destroy();
+	void cache_attributes();
+	void cache_uniforms();
+	bool check_errors();
 public:
 	Program();
 	Program(Program&& other);
@@ -43,6 +47,20 @@ public:
 	 */
 	const char* log() const;
 
-	//TODO bind(),unbind(),obj()
-	//TODO setAttribute(...), setUniform(...), setUniformBlock(...)
+	/**
+	 * Bind the Program for rendering
+	 */
+	void bind() const;
+
+	GLint uniform(const char* name);
+	GLint attribute(const char* name);
+
+	/// Unknown uniforms will silently be ignored.
+	inline void setUniform(const char* name, GLint value)   { glUniform1i(uniform(name), value); }
+	inline void setUniform(const char* name, GLfloat value) { glUniform1f(uniform(name), value); }
+	inline void setUniform(const char* name, const glm::mat3& m) { glUniformMatrix3fv(uniform(name), 1, GL_FALSE, glm::value_ptr(m)); }
+	inline void setUniform(const char* name, const glm::mat4& m) { glUniformMatrix4fv(uniform(name), 1, GL_FALSE, glm::value_ptr(m)); }
+	inline void setUniform(const char* name, const glm::vec2& v) { glUniform2fv(uniform(name), 1, glm::value_ptr(v)); }
+	inline void setUniform(const char* name, const glm::vec3& v) { glUniform3fv(uniform(name), 1, glm::value_ptr(v)); }
+	inline void setUniform(const char* name, const glm::vec4& v) { glUniform4fv(uniform(name), 1, glm::value_ptr(v)); }
 };
