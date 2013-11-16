@@ -24,6 +24,8 @@ Bitmap& Bitmap::operator=(Bitmap&& other) {
 }
 
 bool Bitmap::loadFromFilename(const char* filename) {
+	destroy();
+
 	_pixels = stbi_load(filename, &_width, &_height, &_channels, 0);
 	if(_pixels)
 		return true;
