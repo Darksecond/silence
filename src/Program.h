@@ -56,6 +56,8 @@ public:
 	GLint attribute(const char* name);
 
 	/// Unknown uniforms will silently be ignored.
+	/// These require the shader to be bound, using bind()
+	//TODO check if uniform(...) returns -1, then don't do the glUniform* call
 	inline void setUniform(const char* name, GLint value)   { glUniform1i(uniform(name), value); }
 	inline void setUniform(const char* name, GLfloat value) { glUniform1f(uniform(name), value); }
 	inline void setUniform(const char* name, const glm::mat3& m) { glUniformMatrix3fv(uniform(name), 1, GL_FALSE, glm::value_ptr(m)); }
