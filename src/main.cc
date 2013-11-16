@@ -5,6 +5,7 @@
 #include "GLWindow.h"
 #include "Program.h"
 #include "Shader.h"
+#include "Bitmap.h"
 
 #include <stdio.h>
 static void error_callback(int error, const char* description) {
@@ -35,6 +36,14 @@ int main() {
 	GLWindow window(800, 600);
 	glfwSetKeyCallback(window.window, key_callback);
 	//glfwSwapInterval(0); // Disable VSYNC
+	
+	//TEXTURE TESTS
+	Bitmap b;
+	if(!b.loadFromFilename("/Users/darksecond/build/Baldur/Resources/wooden-crate.jpg")) {
+		printf("Bitmap loading unsuccessful\n");
+		exit(-1);
+	}
+	//END TEXTURE TESTS
 	
 	//SHADER TESTS
 	Shader vs(GL_VERTEX_SHADER);
