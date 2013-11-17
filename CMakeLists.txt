@@ -14,6 +14,8 @@ if (APPLE)
 endif ()
 
 add_executable (silence
+	src/Texture.h
+	src/Texture.cc
 	src/Bitmap.h
 	src/Bitmap.cc
 	src/stb_image.h

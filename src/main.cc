@@ -6,6 +6,7 @@
 #include "Program.h"
 #include "Shader.h"
 #include "Bitmap.h"
+#include "Texture.h"
 
 #include <stdio.h>
 static void error_callback(int error, const char* description) {
@@ -29,6 +30,14 @@ void terminateOpenGL() {
 	glfwTerminate();
 }
 
+void err() {
+	GLenum err = glGetError();
+	if(err != GL_NO_ERROR) {
+		printf("OpenGL Error %i.\n",err);
+		exit(-1);
+	}
+}
+
 // http://www.glfw.org/docs/latest/quick.html
 int main() {
 	initOpenGL();
@@ -43,6 +52,15 @@ int main() {
 		printf("Bitmap loading unsuccessful\n");
 		exit(-1);
 	}
+
+	Texture tex;
+	if(!tex.loadFromBitmap(b)) {
+		printf("Texture loading failed\n");
+		exit(-1);
+	}
+	tex.generateMipmaps();
+
+	err();
 	//END TEXTURE TESTS
 	
 	//SHADER TESTS
