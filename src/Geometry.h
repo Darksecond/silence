@@ -7,6 +7,11 @@
 //     Mesh would get a couple of methods like 'addStream' and 'addAttribute', which would do the right thing.
 //     The more i think about it, the more it seems like a good idea.
 //     Geometry would get a 'loadIntoMesh' method, or maybe 'getMesh', or 'generateMesh', or something like it.
+//
+//     In Irrlicht, a Mesh has MeshBuffers.
+//     A Meshbuffer has a VBO and an IBO, by the looks of it.
+//     http://irrlicht.sourceforge.net/docu/classirr_1_1scene_1_1_i_mesh_buffer.html
+//     http://irrlicht.sourceforge.net/docu/classirr_1_1scene_1_1_i_mesh.html
 class Geometry {
 public:
 	struct Attribute {
