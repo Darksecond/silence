@@ -1,6 +1,9 @@
 #pragma once
 
+#include "Program.h"
+
 class Mesh {
+	void destroy();
 public:
 	Mesh();
 	Mesh(Mesh&& other);
@@ -9,9 +12,9 @@ public:
 	Mesh& operator=(Mesh&& other);
 	Mesh& operator=(const Mesh&) = delete;
 
-	bool loadFromGeometry(const Geometry& geometry);
+	void addStream(void* data, int count, int stride);
+	void addAttribute(int stream_index, core::string_hash name, ...);
 
-	void bind() const;
 	void draw(Program& program) const;
 
 	//AABB aabb() const;

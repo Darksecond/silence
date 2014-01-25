@@ -58,7 +58,7 @@ void GLWindow::initGLFW(const int width, const int height) {
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
-	glfwMakeContextCurrent(window);
+	activateContext();
 }
 
 void GLWindow::open(const int width, const int height) {
@@ -108,4 +108,8 @@ int GLWindow::width() const {
 
 int GLWindow::height() const {
 	return _height;
+}
+
+void GLWindow::activateContext() {
+	glfwMakeContextCurrent(window);
 }

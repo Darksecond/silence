@@ -7,6 +7,7 @@ class GLWindow {
 	bool _resized;
 
 	void hintContext();
+	void activateContext();
 	void initGLEW();
 	void initGLFW(const int width, const int height);
 	void open(const int width, const int height);

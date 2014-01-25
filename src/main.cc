@@ -48,7 +48,7 @@ int main() {
 	
 	//TEXTURE TESTS
 	Bitmap b;
-	if(!b.loadFromFilename("/Users/darksecond/build/Baldur/Resources/wooden-crate.jpg")) {
+	if(!b.loadFromFilename("/Users/darksecond/build/Game Programming (School)/Baldur/Resources/wooden-crate.jpg")) {
 		printf("Bitmap loading unsuccessful\n");
 		exit(-1);
 	}

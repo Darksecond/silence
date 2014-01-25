@@ -52,17 +52,17 @@ public:
 	 */
 	void bind() const;
 
-	GLint uniform(const char* name);
-	GLint attribute(const char* name);
+	GLint uniform(core::string_hash name);
+	GLint attribute(core::string_hash name);
 
 	/// Unknown uniforms will silently be ignored.
 	/// These require the shader to be bound, using bind()
 	//TODO check if uniform(...) returns -1, then don't do the glUniform* call
-	inline void setUniform(const char* name, GLint value)   { glUniform1i(uniform(name), value); }
-	inline void setUniform(const char* name, GLfloat value) { glUniform1f(uniform(name), value); }
-	inline void setUniform(const char* name, const glm::mat3& m) { glUniformMatrix3fv(uniform(name), 1, GL_FALSE, glm::value_ptr(m)); }
-	inline void setUniform(const char* name, const glm::mat4& m) { glUniformMatrix4fv(uniform(name), 1, GL_FALSE, glm::value_ptr(m)); }
-	inline void setUniform(const char* name, const glm::vec2& v) { glUniform2fv(uniform(name), 1, glm::value_ptr(v)); }
-	inline void setUniform(const char* name, const glm::vec3& v) { glUniform3fv(uniform(name), 1, glm::value_ptr(v)); }
-	inline void setUniform(const char* name, const glm::vec4& v) { glUniform4fv(uniform(name), 1, glm::value_ptr(v)); }
+	inline void setUniform(core::string_hash name, GLint value)   { glUniform1i(uniform(name), value); }
+	inline void setUniform(core::string_hash name, GLfloat value) { glUniform1f(uniform(name), value); }
+	inline void setUniform(core::string_hash name, const glm::mat3& m) { glUniformMatrix3fv(uniform(name), 1, GL_FALSE, glm::value_ptr(m)); }
+	inline void setUniform(core::string_hash name, const glm::mat4& m) { glUniformMatrix4fv(uniform(name), 1, GL_FALSE, glm::value_ptr(m)); }
+	inline void setUniform(core::string_hash name, const glm::vec2& v) { glUniform2fv(uniform(name), 1, glm::value_ptr(v)); }
+	inline void setUniform(core::string_hash name, const glm::vec3& v) { glUniform3fv(uniform(name), 1, glm::value_ptr(v)); }
+	inline void setUniform(core::string_hash name, const glm::vec4& v) { glUniform4fv(uniform(name), 1, glm::value_ptr(v)); }
 };

@@ -107,7 +107,7 @@ void Program::bind() const {
 	glUseProgram(_obj);
 }
 
-GLint Program::uniform(const char* name) {
+GLint Program::uniform(core::string_hash name) {
 	auto u = _uniforms.find(name);
 	if(u != _uniforms.end()) {
 		return u->second;
@@ -115,7 +115,7 @@ GLint Program::uniform(const char* name) {
 	return -1;
 }
 
-GLint Program::attribute(const char* name) {
+GLint Program::attribute(core::string_hash name) {
 	auto a = _attributes.find(name);
 	if(a != _attributes.end()) {
 		return a->second;
