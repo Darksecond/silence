@@ -15,6 +15,7 @@ endif ()
 
 add_executable (silence
 	src/Mesh.h
+	src/Mesh.cc
 	src/Texture.h
 	src/Texture.cc
 	src/Bitmap.h

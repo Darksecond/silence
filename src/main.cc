@@ -7,6 +7,7 @@
 #include "Shader.h"
 #include "Bitmap.h"
 #include "Texture.h"
+#include "Mesh.h"
 
 #include <stdio.h>
 static void error_callback(int error, const char* description) {
