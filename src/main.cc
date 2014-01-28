@@ -68,14 +68,11 @@ int main() {
 	Shader vs(GL_VERTEX_SHADER);
 	vs.loadFromString(
 			"#version 330\n"
-			"uniform mat4 projection;\n"
-			"uniform mat4 view;\n"
-			"in vec3 vert;\n"
-			"in vec2 vertTexCoord;\n"
-			"out vec2 fragTexCoord;\n"
+			"\n"
+			"in vec2 position;\n"
+			"\n"
 			"void main() {\n"
-			"fragTexCoord = vertTexCoord;\n"
-			"gl_Position = projection * view * vec4(vert, 1.0);\n"
+			"gl_Position = vec4(position, 0.0, 1.0);\n"
 			"}\n"
 			);
 	if(!vs.compile()) {
@@ -85,11 +82,10 @@ int main() {
 	Shader fs(GL_FRAGMENT_SHADER);
 	fs.loadFromString(
 			"#version 330\n"
-			"uniform sampler2D diffuse;\n"
-			"in vec2 fragTexCoord;\n"
+			"\n"
 			"out vec4 g_diff;\n"
 			"void main() {\n"
-			"g_diff = texture(diffuse, fragTexCoord);\n"
+			"g_diff = vec4(1.0, 1.0, 1.0, 1.0);\n"
 			"}\n"
 			);
 	if(!fs.compile()) {
@@ -105,6 +101,27 @@ int main() {
 	}
 
 	//END SHADER TESTS
+	
+	//MESH TEST
+	float vertices[] = {
+		0.0f,  0.5f, // Vertex 1 (X, Y)
+		0.5f, -0.5f, // Vertex 2 (X, Y)
+		-0.5f, -0.5f  // Vertex 3 (X, Y)
+	};
+
+	Mesh m;
+	m.addStream(vertices, 3, sizeof(float)*2);
+	m.stream(0).addAttribute("position", 2, GL_FLOAT, GL_FALSE, 0);
+	
+	p.bind();
+
+	//CREATE & BIND VAO
+	GLuint vao;
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	m.bind(p); //requires a VAO to be bound.
+	//END MESH TEST
 	
 	double previous = glfwGetTime();
 	double acc = 0.0;
@@ -129,6 +146,11 @@ int main() {
 		}
 		double alpha = acc / dt; // Alpha is [0,1] and is the amount we are into the next frame, we can use this for timestep smoothing.
 		//render(alpha)
+
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glDrawArrays(GL_TRIANGLES, 0, 3); //Should be m.draw(); (or something)
+
 		t += delta;
 		++rf;
 
