@@ -28,7 +28,7 @@ Mesh& Mesh::operator=(Mesh&& other) {
 }
 
 int Mesh::addStream(const void* data, const int count, const int stride) {
-	_streams.emplace_back(data,count,stride);
+	_streams.emplace_back(data, count, stride);
 	return _streams.size() - 1;
 }
 
@@ -38,14 +38,7 @@ void Mesh::bind(Program& program) const {
 	}
 }
 
-void Mesh::draw(/*count*/) const {
-	//TODO glDrawArrays
-	//TODO IBO & glDrawElements
-	//TODO Modes other than GL_TRIANGLES
-	//TODO get count from somewhere.
-}
-
-MeshStream& Mesh::stream(int index) {
+MeshStream& Mesh::stream(const int index) {
 	assert(index >= 0 && index < _streams.size());
 	return _streams[index];
 }

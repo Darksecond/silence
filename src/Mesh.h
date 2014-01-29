@@ -39,13 +39,5 @@ public:
 	 */
 	void bind(Program& program) const;
 
-	/**
-	 * Draw this mesh
-	 * using glDrawElements or glDrawArrays, or others.
-	 * Requires the mesh to be bound first, using bind().
-	 */
-	//TODO IBO&SubMeshes
-	void draw(/*count*/) const;
-
 	//TODO AABB aabb() const;
 };
