@@ -33,8 +33,10 @@ MeshStream& MeshStream::operator=(MeshStream&& other) {
 }
 
 void MeshStream::destroy() {
-	if(_obj)
+	if(_obj) {
 		glDeleteBuffers(1, &_obj);
+		_obj = 0;
+	}
 	_attributes.clear();
 }
 

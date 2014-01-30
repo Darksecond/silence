@@ -112,6 +112,7 @@ int main() {
 	Mesh m;
 	m.addStream(vertices, 3, sizeof(float)*2);
 	m.stream(0).addAttribute("position", 2, GL_FLOAT, GL_FALSE, 0);
+	m.addSubMesh(3);
 	
 	p.bind();
 
@@ -121,6 +122,7 @@ int main() {
 	glBindVertexArray(vao);
 
 	m.bind(p); //requires a VAO to be bound.
+	m.subMesh(0).bind();
 	//END MESH TEST
 	
 	double previous = glfwGetTime();
@@ -149,7 +151,8 @@ int main() {
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		glDrawArrays(GL_TRIANGLES, 0, 3); //Should be m.draw(); (or something)
+
+		m.subMesh(0).draw();
 
 		t += delta;
 		++rf;

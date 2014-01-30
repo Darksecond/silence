@@ -42,3 +42,13 @@ MeshStream& Mesh::stream(const int index) {
 	assert(index >= 0 && index < _streams.size());
 	return _streams[index];
 }
+
+SubMesh& Mesh::subMesh(const int index) {
+	assert(index >= 0 && index < _sub_meshes.size());
+	return _sub_meshes[index];
+}
+
+int Mesh::addSubMesh(const int count) {
+	_sub_meshes.emplace_back(count);
+	return _sub_meshes.size() - 1;
+}
