@@ -49,7 +49,7 @@ int main() {
 	
 	//TEXTURE TESTS
 	Bitmap b;
-	if(!b.loadFromFilename("/Users/darksecond/build/assets/wooden-crate.jpg")) {
+	if(!b.loadFromFilename("/Users/darksecond/build/assets/textures/wooden-crate.jpg")) {
 		printf("Bitmap loading unsuccessful\n");
 		exit(-1);
 	}
