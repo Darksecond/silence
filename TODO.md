@@ -2,7 +2,9 @@ TODO
 ====
 
 * TextureManager
-** Texture parameters (changeable per texture)
+** Texture parameters (changeable per texture) -> TextureParameters class/struct, pass into Texture when creating, or update Texture if it already exists. Should cover it.
+   Texture parameters like, wrap, filtering, mipmap on/off, etc
+** Empty texture, for FBO usage.
 
 * MeshManager
 ** Singleton
@@ -13,13 +15,13 @@ TODO
 *** Generate (simple) meshes on the fly
 ** Obj loader
 
-* SyncManager
+* SyncManager -> Uses Timer
 ** Event
 ** TriggerSystem
 *** Trigger
 ** BPM
 
-* Parameters
+* Parameters -> In Virta this is a singleton, with namespaces.
 ** namespaces
 
 * Parser
@@ -31,7 +33,8 @@ TODO
 ** trigger
 ** bpm
 ** event
-** render target
+** render target (renderbuffer)
+** fbo
 
 * Timer
 ** Seems to be just a timer, no delta calculations.
@@ -62,7 +65,9 @@ TODO
 
 * Postprocess
 * FrameBufferObject
-* Render target (FBO)
+* Framebuffer Object
+** Render target (renderbuffer)
+** Render to texture
 * Material
 
 * Music
