@@ -1,6 +1,11 @@
 TODO
 ====
 
+* Mesh
+** Wireframe mode
+** Point cloud mode
+** OBJ loader
+
 * TextureManager
 ** Texture parameters (changeable per texture) -> TextureParameters class/struct, pass into Texture when creating, or update Texture if it already exists. Should cover it.
    Texture parameters like, wrap, filtering, mipmap on/off, etc
@@ -12,8 +17,8 @@ TODO
 ** unload(name)
 ** get(name) : Mesh&
 ** Primitive(s)
-*** Generate (simple) meshes on the fly
-** Obj loader
+*** Generate (simple) meshes on the fly -> Cube, Sphere, Quad (fullscreen)
+** OBJ loader
 
 * SyncManager -> Uses Timer
 ** Event
@@ -64,7 +69,6 @@ TODO
     They run from 0.0 to 1.0 position.
 
 * Postprocess
-* FrameBufferObject
 * Framebuffer Object
 ** Render target (renderbuffer)
 ** Render to texture
