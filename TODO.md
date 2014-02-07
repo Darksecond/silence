@@ -1,20 +1,17 @@
 TODO
 ====
 
-* ProgramManager
-** Singleton
-** load(name)
-** unload(name)
-** get(name) : Program&
-** reload
+* TextureManager
+** Texture parameters (changeable per texture)
 
 * MeshManager
 ** Singleton
 ** load(name)
 ** unload(name)
 ** get(name) : Mesh&
-** Primitive 
+** Primitive(s)
 *** Generate (simple) meshes on the fly
+** Obj loader
 
 * SyncManager
 ** Event
@@ -23,6 +20,18 @@ TODO
 ** BPM
 
 * Parameters
+** namespaces
+
+* Parser
+** namespace (-> parameters)
+** config
+** texture (parameters)
+** mesh (parameters)
+** material
+** trigger
+** bpm
+** event
+** render target
 
 * Timer
 * Frametimer
@@ -32,6 +41,9 @@ TODO
 
 * Postprocess
 * FrameBufferObject
+* Render target (FBO)
+* Material
 
-* Sound
 * Music
+** OpenAL/Fmod/...
+** Syncronisation with Timer
