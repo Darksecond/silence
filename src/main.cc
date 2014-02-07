@@ -9,6 +9,8 @@
 #include "Texture.h"
 #include "Mesh.h"
 
+#include "TextureManager.h"
+
 #include <stdio.h>
 static void error_callback(int error, const char* description) {
 	fputs(description, stderr);
@@ -63,6 +65,15 @@ int main() {
 
 	err();
 	//END TEXTURE TESTS
+	
+	//TEXTURE MANAGER TESTS
+	TextureManager::inst().setRoot("/Users/darksecond/build/assets/textures/");
+	TextureManager::inst().loadFromFilename("wooden-crate.jpg");
+	Texture& tx = TextureManager::inst().get("wooden-crate.jpg");
+	tx.bind();
+	err();
+	TextureManager::inst().unloadAll();
+	//END TEXTURE MANAGER TESTS
 	
 	//SHADER TESTS
 	Shader vs(GL_VERTEX_SHADER);

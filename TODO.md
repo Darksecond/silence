@@ -1,13 +1,6 @@
 TODO
 ====
 
-* TextureManager
-** Singleton
-** load(name)
-** unload(name)
-** reload
-** get(name)
-
 * ProgramManager
 ** Singleton
 ** load(name)

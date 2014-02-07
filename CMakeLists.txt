@@ -14,6 +14,8 @@ if (APPLE)
 endif ()
 
 add_executable (silence
+	src/TextureManager.h
+	src/TextureManager.cc
 	src/SubMesh.h
 	src/SubMesh.cc
 	src/MeshStream.h
