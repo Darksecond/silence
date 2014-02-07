@@ -36,8 +36,10 @@ TODO
 * Timer
 ** Seems to be just a timer, no delta calculations.
    This also means it runs in (milli/micro)seconds.
-   Although it does have a sync with the music. -> Can sync put make Timer go backwards in time? or just not forwards any?
+   Although it does have a sync with the music. -> Can sync make Timer go backwards in time? or just not forwards any?
 ** update()
+** getTime()
+** setPaused(paused : bool)
 * Frametimer
 ** This is the actual frame timer, or 'main loop'
    Every scene has it's own frame timer
