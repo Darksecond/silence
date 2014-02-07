@@ -22,12 +22,17 @@ public:
 	/**
 	 * Load the shader source from a source string.
 	 * You need to call compile to actually compile the shader, this only sets the source.
-	 * \returns true if loaded successfully, false if not.
 	 */
 	void loadFromString(const char* source);
 	
 	//TODO bool loadFromFile(File& file);
-	//TODO bool loadFromFilename(const char* filename);
+
+	/**
+	 * Load the shader source from a filename.
+	 * You need to call compile to actually compile the shader, this only sets the source.
+	 * \returns true if loaded successfully, false if not.
+	 */
+	bool loadFromFilename(const char* filename);
 
 	/**
 	 * Compile the shader

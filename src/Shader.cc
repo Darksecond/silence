@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include <cstdio>
 
 Shader::Shader(const GLenum type) : _log(nullptr) {
 	_obj = glCreateShader(type);
@@ -25,6 +26,29 @@ Shader& Shader::operator=(Shader&& other) {
 
 void Shader::loadFromString(const char* source) {
 	glShaderSource(_obj, 1, &source, NULL);
+}
+
+bool Shader::loadFromFilename(const char* filename) {
+	FILE* shader;
+	if(!(shader = fopen(filename, "r"))) {
+		return false;
+	}
+
+	// Find out file size
+	fseek(shader, 0, SEEK_END);
+	long len = ftell(shader);
+	fseek(shader, 0, SEEK_SET);
+
+	char* str = new char[len];
+	long r = fread(str, 1, len, shader);
+	str[r - 1] = '\0';
+	
+	loadFromString(str);
+
+	delete [] str;
+
+	fclose(shader);
+	return true;
 }
 
 bool Shader::compile() {

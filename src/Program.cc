@@ -5,9 +5,11 @@ Program::Program() : _log(nullptr) {
 	_obj = glCreateProgram();
 }
 
-Program::Program(Program&& other) : _obj(other._obj), _shaders(other._shaders), _log(other._log) {
+Program::Program(Program&& other) : _obj(other._obj), _shaders(other._shaders), _log(other._log), _attributes(other._attributes), _uniforms(other._uniforms) {
 	other._obj = 0;
 	other._shaders.clear();
+	other._attributes.clear();
+	other._uniforms.clear();
 	other._log = nullptr;
 }
 
@@ -24,6 +26,10 @@ Program& Program::operator=(Program&& other) {
 	other._shaders.clear();
 	_log = other._log;
 	other._log = nullptr;
+	_attributes = std::move(other._attributes);
+	other._attributes.clear();
+	_uniforms = std::move(other._uniforms);
+	other._uniforms.clear();
 	return *this;
 }
 
@@ -64,6 +70,8 @@ void Program::destroy() {
 		delete [] _log;
 		_log = nullptr;
 	}
+	_attributes.clear();
+	_uniforms.clear();
 }
 
 void Program::cache_attributes() {

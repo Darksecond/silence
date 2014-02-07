@@ -10,6 +10,7 @@
 #include "Mesh.h"
 
 #include "TextureManager.h"
+#include "ProgramManager.h"
 
 #include <stdio.h>
 static void error_callback(int error, const char* description) {
@@ -49,23 +50,6 @@ int main() {
 	glfwSetKeyCallback(window.window, key_callback);
 	//glfwSwapInterval(0); // Disable VSYNC
 	
-	//TEXTURE TESTS
-	Bitmap b;
-	if(!b.loadFromFilename("/Users/darksecond/build/assets/textures/wooden-crate.jpg")) {
-		printf("Bitmap loading unsuccessful\n");
-		exit(-1);
-	}
-
-	Texture tex;
-	if(!tex.loadFromBitmap(b)) {
-		printf("Texture loading failed\n");
-		exit(-1);
-	}
-	tex.generateMipmaps();
-
-	err();
-	//END TEXTURE TESTS
-	
 	//TEXTURE MANAGER TESTS
 	TextureManager::inst().setRoot("/Users/darksecond/build/assets/textures/");
 	TextureManager::inst().loadFromFilename("wooden-crate.jpg");
@@ -75,43 +59,13 @@ int main() {
 	TextureManager::inst().unloadAll();
 	//END TEXTURE MANAGER TESTS
 	
-	//SHADER TESTS
-	Shader vs(GL_VERTEX_SHADER);
-	vs.loadFromString(
-			"#version 330\n"
-			"\n"
-			"in vec2 position;\n"
-			"\n"
-			"void main() {\n"
-			"gl_Position = vec4(position, 0.0, 1.0);\n"
-			"}\n"
-			);
-	if(!vs.compile()) {
-		printf("VS Compile failed: %s\n",vs.log());
-		exit(-1);
-	}
-	Shader fs(GL_FRAGMENT_SHADER);
-	fs.loadFromString(
-			"#version 330\n"
-			"\n"
-			"out vec4 g_diff;\n"
-			"void main() {\n"
-			"g_diff = vec4(1.0, 1.0, 1.0, 1.0);\n"
-			"}\n"
-			);
-	if(!fs.compile()) {
-		printf("FS Compile failed: %s\n",fs.log());
-		exit(-1);
-	}
-	Program p;
-	p.attachShader(&vs);
-	p.attachShader(&fs);
-	if(!p.link()) {
-		printf("Link failed: %s\n",p.log());
-		exit(-1);
-	}
-
-	//END SHADER TESTS
+	//PROGRAM MANAGER TESTS
+	ProgramManager::inst().setRoot("/Users/darksecond/build/assets/shaders/");
+	ProgramManager::inst().loadFromFilename("simple");
+	Program& p = ProgramManager::inst().get("simple");
+	//ProgramManager::inst().unloadAll(); //We are actually USING p
+	err();
+	//END PROGRAM MANAGER TESTS
 	
 	//MESH TEST
 	float vertices[] = {
