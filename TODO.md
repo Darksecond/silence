@@ -41,10 +41,6 @@ TODO
 ** render target (renderbuffer)
 ** fbo
 
-* Timer
-** setTime(...)
-** changeTime(...)
-
 * Demo
 ** This has a timeline of all scenes
    Every timeline entry has a start and stop time attached.

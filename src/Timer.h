@@ -11,6 +11,9 @@ public:
 	double getTime() const;
 	void setPaused(const bool paused);
 	float getDelta() const;
+	
+	void setTime(double time);
+	void changeTime(float delta);
 
 	//TODO sync
 };

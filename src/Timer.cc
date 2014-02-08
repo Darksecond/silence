@@ -32,3 +32,17 @@ void Timer::setPaused(const bool paused) {
 float Timer::getDelta() const {
 	return _delta;
 }
+
+void Timer::setTime(double time) {
+	_elapsed = time;
+
+	if(_elapsed < 0)
+		_elapsed = 0;
+}
+
+void Timer::changeTime(float delta) {
+	_elapsed += delta;
+
+	if(_elapsed < 0)
+		_elapsed = 0;
+}
