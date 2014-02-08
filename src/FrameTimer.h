@@ -6,7 +6,10 @@ class FrameTimer {
 	int _loops;
 	FPS _fps;
 public:
-	FrameTimer(/*dt, frameskip*/);
+	const float dt;
+	const int frameskip;
+
+	FrameTimer(const float dt = 1.0/30, const int frameskip = 5);
 	void update(float delta);
 	float getAlpha() const;
 	float getFPS() const;

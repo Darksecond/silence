@@ -1,10 +1,7 @@
 #include "FrameTimer.h"
 #include "System.h"
 
-static const double dt = 1.0/25;
-static const int frameskip = 5;
-
-FrameTimer::FrameTimer() {
+FrameTimer::FrameTimer(const float target_dt, const int target_frameskip) : dt(target_dt), frameskip(target_frameskip) {
 	_acc = 0.0;
 }
 

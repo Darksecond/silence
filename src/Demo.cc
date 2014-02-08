@@ -1,61 +1,76 @@
 #include <cstdio>
+#include <algorithm>
 #include "Demo.h"
 #include "System.h"
-#include "TextureManager.h"
-#include "ProgramManager.h"
+#include "Scene.h"
+#include "Math.h"
 
-Demo::Demo() {
+Demo::Demo() : _ft(1.0/60) {
 }
 
 void Demo::init() {
-	ProgramManager::inst().loadFromFilename("simple");
-	TextureManager::inst().loadFromFilename("wooden-crate.jpg");
-
-	float vertices[] = {
-		0.0f,  0.5f, // Vertex 1 (X, Y)
-		0.5f, -0.5f, // Vertex 2 (X, Y)
-		-0.5f, -0.5f  // Vertex 3 (X, Y)
-	};
-
-	_m.addStream(vertices, 3, sizeof(float)*2);
-	_m.stream(0).addAttribute("position", 2, GL_FLOAT, GL_FALSE, 0);
-	_m.addSubMesh(3);
-
-	Program& p = ProgramManager::inst().get("simple");
-	p.bind();
-
-	GLuint vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
-	_m.bind(p); //requires a VAO to be bound.
-	_m.subMesh(0).bind();
+	for(auto it : _scenes) {
+		it.second->init();
+	}
 }
 
 void Demo::kill() {
+	for(auto it : _scenes) {
+		it.second->kill();
+		delete it.second;
+	}
+	_scenes.clear();
+	_timeline.clear();
 }
 
 void Demo::update() {
 	float delta = System::inst().getDelta(true);
+	const double time = System::inst().getTime();
 
 	_fps.update(delta);
 	_ft.update(delta);
 	while(_ft.shouldStep()) {
-		//TODO update(dt)
+		for(Entry& e : _timeline) {
+			if(time >= e.start && time < e.end) { // Scene is active, update
+				e.scene->position = Math::rangePosition(time, e.start, e.end);
+				e.scene->update(_ft.dt);
+			}
+		}
 		_ft.endStep();
 	}
 }
 
 void Demo::render() {
 	_fps.step();
+	const double time = System::inst().getTime();
 
-	//render stuff
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	_m.subMesh(0).draw();
+	// Render scenes
+	for(Entry& e : _timeline) {
+		if(time >= e.start && time < e.end) {
+			//active scene
+			e.scene->render(_ft.getAlpha());
+		}
+	}
 
 	char title[1024];
 	sprintf(title, "UFPS: %f RFPS: %f alpha: %f", _ft.getFPS(), _fps.getFPS(), _ft.getAlpha());
 	System::inst().setTitle(title);
 }
+
+void Demo::addScene(const char* name, Scene* scene) {
+	printf("Added scene %s\n", name);
+	_scenes[name] = scene;
+}
+
+void Demo::createEntry(const char* scene, double start, double end, int prio) {
+	auto it = _scenes.find(scene);
+	if(it != _scenes.end()) {
+		Entry e{it->second, start, end, prio};
+		_timeline.push_back(e);
+		std::sort(_timeline.begin(), _timeline.end());
+		printf("Created entry for %s at [%f,%f] with %i priority\n", scene, start, end, prio);
+	} else {
+		printf("Scene %s does not exist.\n", scene);
+	}
+}
+

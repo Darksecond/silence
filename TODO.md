@@ -41,18 +41,6 @@ TODO
 ** render target (renderbuffer)
 ** fbo
 
-* Demo
-** This has a timeline of all scenes
-   Every timeline entry has a start and stop time attached.
-** Scene
-*** init()
-*** deinit()
-*** update(delta) -> delta might not even be needed, since update steps *should* always be the same size.
-*** draw(alpha) -> alpha is optional
-*** setPosition(pos) -> Position is a float between 0.0 and 1.0.
-*** Scenes have no knowledge about what their absolute start and end times are.
-    They run from 0.0 to 1.0 position.
-
 * Postprocess
 * Framebuffer Object
 ** Render target (renderbuffer)
