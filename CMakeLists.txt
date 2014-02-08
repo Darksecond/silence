@@ -14,6 +14,16 @@ if (APPLE)
 endif ()
 
 add_executable (silence
+	src/FPS.h
+	src/FPS.cc
+	src/FrameTimer.h
+	src/FrameTimer.cc
+	src/System.h
+	src/System.cc
+	src/Demo.h
+	src/Demo.cc
+	src/Timer.h
+	src/Timer.cc
 	src/ProgramManager.h
 	src/ProgramManager.cc
 	src/TextureManager.h

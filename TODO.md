@@ -2,12 +2,7 @@ TODO
 ====
 
 * System
-** init() -> opens window, start opengl, setRoot
-** kill/deinit() -> closes window, stop opengl, release assets
-** update() -> updates Timer, Song, SyncManager
-** Timer
-** Song
-** GLWindow
+** input stuff (getKeyPressed)
 
 * Mesh
 ** Wireframe mode
