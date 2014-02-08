@@ -13,5 +13,4 @@ public:
 	float getDelta() const;
 
 	//TODO sync
-	//TODO delta
 };
