@@ -45,19 +45,8 @@ TODO
 ** fbo
 
 * Timer
-** Seems to be just a timer, no delta calculations.
-   This also means it runs in (milli/micro)seconds.
-   Although it does have a sync with the music. -> Can sync make Timer go backwards in time? or just not forwards any?
-** update()
-** getTime()
-** setPaused(paused : bool)
-* Frametimer
-** This is the actual frame timer, or 'main loop'
-   Every scene has it's own frame timer
-   (i'm guessing so different scenes can have different update rates)
-   This *does* provide a delta() method.
-   It also provides stepsLeft, endStep and other method to control the steps.
-** At least, this is how Virta does it. I might do it differently.
+** setTime(...)
+** changeTime(...)
 
 * Demo
 ** This has a timeline of all scenes
