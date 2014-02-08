@@ -1,9 +1,6 @@
 TODO
 ====
 
-* System
-** input stuff (getKeyPressed)
-
 * Mesh
 ** Wireframe mode
 ** Point cloud mode
