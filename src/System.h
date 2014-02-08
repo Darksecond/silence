@@ -27,4 +27,16 @@ public:
 	inline void setTitle(const char* title) {
 		_window->setTitle(title);
 	}
+
+	inline bool keyPressed(const int key) const {
+		return _window->keyPressed(key);
+	}
+
+	inline bool keyDown(const int key) const {
+		return _window->keyDown(key);
+	}
+
+	inline bool keyUp(const int key) const {
+		return _window->keyUp(key);
+	}
 };

@@ -113,3 +113,25 @@ int GLWindow::height() const {
 void GLWindow::activateContext() {
 	glfwMakeContextCurrent(window);
 }
+
+bool GLWindow::keyPressed(const int key) {
+	if(keyDown(key)) {
+		if(key_pressed[key]) {
+			return false;
+		} else {
+			key_pressed[key] = true;
+			return true;
+		}
+	} else {
+		key_pressed[key] = false;
+		return false;
+	}
+}
+
+bool GLWindow::keyDown(const int key) {
+	return glfwGetKey(window, key) == GLFW_PRESS;
+}
+
+bool GLWindow::keyUp(const int key) {
+	return glfwGetKey(window, key) == GLFW_RELEASE;
+}

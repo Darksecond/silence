@@ -5,6 +5,7 @@
 class GLWindow {
 	int _width, _height;
 	bool _resized;
+	bool key_pressed[GLFW_KEY_LAST + 1];
 
 	void hintContext();
 	void activateContext();
@@ -28,4 +29,8 @@ public:
 	bool resized();
 	int width() const;
 	int height() const;
+
+	bool keyPressed(const int key);
+	bool keyDown(const int key);
+	bool keyUp(const int key);
 };

@@ -51,7 +51,7 @@ void System::endFrame() {
 
 bool System::shouldClose() const {
 	bool window = _window->shouldClose();
-	bool escape = glfwGetKey(_window->window, GLFW_KEY_ESCAPE) == GLFW_PRESS;
+	bool escape = keyPressed(GLFW_KEY_ESCAPE);
 	return window || escape;
 }
 
