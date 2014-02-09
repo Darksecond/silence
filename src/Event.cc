@@ -1,9 +1,6 @@
 #include "Event.h"
 #include "System.h"
 
-Event::Event() : _start(0.0), _duration(0.0) {
-}
-
 Event::Event(double start, float duration) : _start(start), _duration(duration) {
 }
 
