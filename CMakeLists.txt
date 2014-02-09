@@ -14,6 +14,8 @@ if (APPLE)
 endif ()
 
 add_executable (silence
+	src/Sequence.h
+	src/Sequence.cc
 	src/SyncManager.h
 	src/SyncManager.cc
 	src/Event.h
