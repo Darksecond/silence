@@ -20,10 +20,7 @@ TODO
 *** Generate (simple) meshes on the fly -> Cube, Sphere, Quad (fullscreen)
 ** OBJ loader
 
-* SyncManager -> Uses Timer
-** Event
-** TriggerSystem
-*** Trigger
+* SyncManager
 ** BPM
 
 * Parameters -> In Virta this is a singleton, with namespaces.
