@@ -1,6 +1,8 @@
 TODO
 ====
 
+* Loading screen
+
 * Mesh
 ** Wireframe mode
 ** Point cloud mode
@@ -21,6 +23,7 @@ TODO
 ** OBJ loader
 
 * SyncManager
+** update -> called from System
 ** BPM
 
 * Parameters -> In Virta this is a singleton, with namespaces.
