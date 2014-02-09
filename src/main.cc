@@ -11,6 +11,7 @@
 
 #include "TextureManager.h"
 #include "ProgramManager.h"
+#include "SyncManager.h"
 
 #include "Timer.h"
 #include "System.h"
