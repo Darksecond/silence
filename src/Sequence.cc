@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "Sequence.h"
 #include "System.h"
 
@@ -25,5 +26,6 @@ float Sequence::getValue() const {
 			 value += pos;
 		}
 	}
+	value = std::min(value, 1.0f);
 	return value;
 }
