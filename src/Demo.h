@@ -24,6 +24,9 @@ class Demo {
 	FPS _fps;
 	std::map<core::string_hash, Scene*> _scenes;
 	std::vector<Entry> _timeline;
+	bool _paused;
+
+	void handleInput();
 public:
 	Demo();
 	void init();

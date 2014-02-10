@@ -23,6 +23,8 @@ public:
 	inline double getTime() const {
 		return _timer.getTime();
 	}
+	void setPaused(const bool paused);
+	void changeTime(double time);
 
 	inline void setTitle(const char* title) {
 		_window->setTitle(title);

@@ -63,3 +63,13 @@ float System::getDelta(bool abs) const {
 	}
 	return delta;
 }
+
+void System::setPaused(const bool paused) {
+	//TODO pause song
+	_timer.setPaused(paused);
+}
+
+void System::changeTime(double time) {
+	//TODO change time on song
+	_timer.changeTime(time);
+}
