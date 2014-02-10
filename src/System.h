@@ -25,6 +25,7 @@ public:
 	}
 	void setPaused(const bool paused);
 	void changeTime(double time);
+	void setTime(double time);
 
 	inline void setTitle(const char* title) {
 		_window->setTitle(title);

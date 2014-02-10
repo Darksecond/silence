@@ -73,3 +73,8 @@ void System::changeTime(double time) {
 	//TODO change time on song
 	_timer.changeTime(time);
 }
+
+void System::setTime(double time) {
+	//TODO set time on song
+	_timer.setTime(time);
+}

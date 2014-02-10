@@ -26,6 +26,12 @@ class Demo {
 	std::vector<Entry> _timeline;
 	bool _paused;
 
+	struct {
+		double start;
+		double end;
+		bool active;
+	} _looping;
+
 	void handleInput();
 public:
 	Demo();

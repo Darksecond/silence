@@ -6,6 +6,7 @@
 #include "Math.h"
 
 Demo::Demo() : _ft(1.0/60), _paused(false) {
+	_looping.active = false;
 }
 
 void Demo::init() {
@@ -28,6 +29,11 @@ void Demo::update() {
 	const double time = System::inst().getTime();
 
 	handleInput();
+	if(_looping.active) {
+		if(time >= _looping.end) {
+			System::inst().setTime(_looping.start);
+		}
+	}
 
 	if(!_paused) {
 		_fps.update(delta);
@@ -58,6 +64,8 @@ void Demo::render() {
 
 	char title[1024];
 	sprintf(title, "UFPS: %f RFPS: %f alpha: %f time: %f", _ft.getFPS(), _fps.getFPS(), _ft.getAlpha(), time);
+	// Looping information
+	sprintf(title, "%s %s [%f->%f]", title, _looping.active?"A":"I", _looping.start, _looping.end);
 	System::inst().setTitle(title);
 }
 
@@ -98,7 +106,18 @@ void Demo::handleInput() {
 		System::inst().changeTime(changeAmount);
 	}
 
-	//TODO Looping
+	// Looping
+	if(System::inst().keyPressed('[')) {
+		_looping.start = System::inst().getTime();
+	}
+	else if(System::inst().keyPressed(']')) {
+		_looping.end = System::inst().getTime();
+		_looping.active = true;
+	}
+	else if(System::inst().keyPressed('P')) {
+		_looping.active = !_looping.active;
+	}
+
 	//TODO Mark & Recall
 	//TODO Reloading
 }
