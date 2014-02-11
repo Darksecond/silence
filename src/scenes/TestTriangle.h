@@ -8,9 +8,6 @@ class TestTriangle : public Scene {
 	Mesh _m;
 public:
 	inline virtual void init() {
-		ProgramManager::inst().loadFromFilename("simple");
-		TextureManager::inst().loadFromFilename("wooden-crate.jpg");
-
 		float vertices[] = {
 			0.0f,  0.5f, // Vertex 1 (X, Y)
 			0.5f, -0.5f, // Vertex 2 (X, Y)

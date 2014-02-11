@@ -41,6 +41,11 @@ int main() {
 	//glfwSwapInterval(0); // Disable VSYNC
 	
 	Demo demo;
+
+	//Parse (and load resources)
+	ProgramManager::inst().loadFromFilename("simple");
+	TextureManager::inst().loadFromFilename("wooden-crate.jpg");
+
 	demo.addScene("test",new TestTriangle());
 	demo.createEntry("test", 0, 10, 100);
 
