@@ -34,6 +34,8 @@ TODO
 ** BPM
 
 * Parameters -> In Virta this is a singleton, with namespaces.
+** Make parameters animateable, like SyncManager but built into the parameter.
+   Also support various scripts.
 ** namespaces
 
 * Parser
