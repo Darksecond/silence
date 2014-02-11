@@ -1,6 +1,12 @@
 TODO
 ====
 
+* Scene
+** Scene should not load resources, only 'get' them.
+
+* TextureManager & ProgramManager
+** Optimize loading something twice
+
 * Loading screen
 
 * Mesh
@@ -11,6 +17,7 @@ TODO
 * TextureManager
 ** Texture parameters (changeable per texture) -> TextureParameters class/struct, pass into Texture when creating, or update Texture if it already exists. Should cover it.
    Texture parameters like, wrap, filtering, mipmap on/off, etc
+** Specify texture parameters on 'load'.
 ** Empty texture, for FBO usage.
 
 * MeshManager
@@ -30,6 +37,7 @@ TODO
 ** namespaces
 
 * Parser
+** Make parser load textures, meshes and programs
 ** namespace (-> parameters)
 ** config
 ** texture (parameters)
