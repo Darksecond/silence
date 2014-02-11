@@ -42,6 +42,8 @@ int main() {
 	
 	Demo demo;
 
+	//TODO Parsing should be done *INSIDE* Demo.
+	//     Otherwise demo can't reload resources.
 	//Parse (and load resources)
 	ProgramManager::inst().loadFromFilename("simple");
 	TextureManager::inst().loadFromFilename("wooden-crate.jpg");
