@@ -74,3 +74,7 @@ if (NOT APPLE)
 	include_directories (${OPENGL_INCLUDE_DIR})
 endif ()
 target_link_libraries (silence ${OPENGL_LIBRARIES})
+
+find_package(LibConfig REQUIRED)
+include_directories (${LIBCONFIGPP_INCLUDE_DIR})
+target_link_libraries (silence ${LIBCONFIGPP_LIBRARIES})
